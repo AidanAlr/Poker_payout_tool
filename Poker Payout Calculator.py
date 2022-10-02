@@ -27,51 +27,55 @@ def calculate_payouts(participants):
     print(f'\nTotal Buy-in: {total_buyin}')
     print(f'Total Cash-out: {total_cashout}')
 
-    print('\nPayout calculator:'.upper())
+    if total_cashout == total_buyin:
 
-    # Calculating who pays whom starting with the largest loss and largest winner
-    # While there are still participants i.e. those that need to be paid out
-    while participants:
-        try:
-            # If largest win greater than absolute largest loss
-            if participants[0].net > abs(participants[-1].net):
-                # Print that payout
-                print(f'{participants[-1].name} pays {participants[0].name} {abs(participants[-1].net)} GBP')
-                # Subtract the largest loss from participant[0].net i.e. money owed
-                participants[0].net -= abs(participants[-1].net)
-                # Remove participants[-1] from list as they pay all to participant[0]
-                participants.pop()
+        print('\nPayout calculator:'.upper())
 
-            # If largest win smaller than absolute largest loss
-            if participants[0].net < abs(participants[-1].net):
-                # The entire win is paid out by the biggest loser
-                print(f'{participants[-1].name} pays {participants[0].name}'
-                      f' {abs(participants[0].net)} GBP')
-                # Adjusting participants[-1].net i.e. how much they still owe
-                participants[-1].net += participants[0].net
-                # Remove the largest winner from participants list as they have been paid fully
-                participants.pop(0)
+        # Calculating who pays whom starting with the largest loss and largest winner
+        # While there are still participants i.e. those that need to be paid out
+        while participants:
+            try:
+                # If largest win greater than absolute largest loss
+                if participants[0].net > abs(participants[-1].net):
+                    # Print that payout
+                    print(f'{participants[-1].name} pays {participants[0].name} {abs(participants[-1].net)} GBP')
+                    # Subtract the largest loss from participant[0].net i.e. money owed
+                    participants[0].net -= abs(participants[-1].net)
+                    # Remove participants[-1] from list as they pay all to participant[0]
+                    participants.pop()
 
-            if participants[0].net == abs(participants[-1].net):
-                # Print that payout
-                print(f'{participants[-1].name} pays {participants[0].name} {abs(participants[-1].net)} GBP')
-                # Remove participants[-1] from list as they pay all to participant[0]
-                participants.pop()
-                participants.pop(0)
+                # If largest win smaller than absolute largest loss
+                if participants[0].net < abs(participants[-1].net):
+                    # The entire win is paid out by the biggest loser
+                    print(f'{participants[-1].name} pays {participants[0].name}'
+                          f' {abs(participants[0].net)} GBP')
+                    # Adjusting participants[-1].net i.e. how much they still owe
+                    participants[-1].net += participants[0].net
+                    # Remove the largest winner from participants list as they have been paid fully
+                    participants.pop(0)
 
-            # Prevents participants paying themselves zero
-            if participants[0] == participants[-1]:
-                break
+                if participants[0].net == abs(participants[-1].net):
+                    # Print that payout
+                    print(f'{participants[-1].name} pays {participants[0].name} {abs(participants[-1].net)} GBP')
+                    # Remove participants[-1] from list as they pay all to participant[0]
+                    participants.pop()
+                    participants.pop(0)
 
-        except IndexError:
-            print(f'\nPayouts have been calculated! GG!')
+                # Prevents participants paying themselves zero
+                if participants[0] == participants[-1]:
+                    break
 
+            except IndexError:
+                print(f'\nPayouts have been calculated! GG!')
+
+    else:
+        print('The buy-in and cash-out dont add up!')
 
 Aidan = Player('Aidan', 25, 18)
 Ethan = Player('Ethan', 10, 15)
 Ollie = Player('Ollie', 20, 22)
 Tarun = Player('Tarun', 20, 30)
-Sam = Player('Sam', 30, 20)
+Sam = Player('Sam', 30, 27)
 
 participants = [Aidan, Ethan, Ollie, Tarun, Sam]
 
