@@ -13,13 +13,21 @@ def calculate_payouts(participants):
     # Sorting the payouts from largest[0] to smallest[-1]
     participants.sort(key=lambda Player: Player.net, reverse=True)
 
+    total_buyin = 0
+    total_cashout = 0
+
     # Payout Table
     print('Payouts:'.upper())
     for person in participants:
         print(f'{person.name} = {person.net}')
+        total_buyin += person.buyin
+        total_cashout += person.cashout
 
-    print('\n')
-    print('Payout calculator:'.upper())
+
+    print(f'\nTotal Buy-in: {total_buyin}')
+    print(f'Total Cash-out: {total_cashout}')
+
+    print('\nPayout calculator:'.upper())
 
     # Calculating who pays whom starting with the largest loss and largest winner
     # While there are still participants i.e. those that need to be paid out
@@ -56,7 +64,7 @@ def calculate_payouts(participants):
                 break
 
         except IndexError:
-            print('Payouts have been calculated! GG!')
+            print(f'\nPayouts have been calculated! GG!')
 
 
 Aidan = Player('Aidan', 25, 18)
