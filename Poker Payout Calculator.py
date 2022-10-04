@@ -71,11 +71,11 @@ def calculate_payouts(participants):
     else:
         print('The buy-in and cash-out dont add up!')
 
-Aidan = Player('Aidan', 25, 18)
+Aidan = Player('Aidan', 25, 18.5)
 Ethan = Player('Ethan', 10, 15)
 Ollie = Player('Ollie', 20, 22)
 Tarun = Player('Tarun', 20, 30)
-Sam = Player('Sam', 30, 27)
+Sam = Player('Sam', 30, 19.5)
 
 participants = [Aidan, Ethan, Ollie, Tarun, Sam]
 
